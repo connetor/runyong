@@ -3,6 +3,7 @@ showTab(currentTab); // Display the crurrent tab
 
 function showTab(n) {
   // This function will display the specified tab of the form...
+  console.log(n);
   var x = document.getElementsByClassName("tab");
   x[n].style.display = "block";
   //... and fix the Previous/Next buttons:
@@ -15,6 +16,7 @@ function showTab(n) {
 
 
   if (n == (x.length - 1)) {
+
     document.getElementById("nextBtn").innerHTML = "Submit";
     document.getElementById("nextBtn").addEventListener("click",function(){FormData.submit();});
 
@@ -44,7 +46,7 @@ function nextPrev(n) {
     x[currentTab].style.display = "none";
     // Increase or decrease the current tab by 1:
     currentTab = currentTab + n;
-    console.log(currentTab);
+  
    
     // if you have reached the end of the form...
     if (currentTab >= x.length) {
@@ -87,7 +89,7 @@ function nextPrev(n) {
     x[currentTab].style.display = "none";
     // Increase or decrease the current tab by 1:
     currentTab = currentTab + n;
-    console.log(currentTab);
+    
    
     // if you have reached the end of the form...
     if (currentTab >= x.length) {
@@ -100,8 +102,31 @@ function nextPrev(n) {
   }
         break;
     case 2:
-        break;
+    console.log(currentTab);
+    if($('input[name=Postconfirm]:checked', '#regForm').val()!= 0 && $('input[name=Postconfirm]:checked', '#regForm').val()!=1){
+ 
+      document.getElementById("msgPost").innerHTML="กรุณาเลือกวิธีส่ง";
+      $('#msgPost').css({"font-size:":"12px","color":"red","float":"right"});
+     } else{
 
+      document.getElementById("msgPost").innerHTML=" ";
+    if (n == 1 && !validateForm()) return false;
+    // Hide the current tab:
+    x[currentTab].style.display = "none";
+    // Increase or decrease the current tab by 1:
+    currentTab = currentTab + n;
+  
+   
+    // if you have reached the end of the form...
+    if (currentTab >= x.length) {
+      // ... the form gets submitted:
+      document.getElementById("regForm").submit();
+      return false;
+    }
+    // Otherwise, display the correct tab:
+    showTab(currentTab);
+        break;
+  }
     default:break;
 }
 
@@ -157,7 +182,16 @@ function checkID(){
     }
 }
 
+ $(document).ready(function() {
+        
+                $('#IDcard').focusout(function() {
+                 check_IDcard();
+                });
+				$('#nameth').focusout(function() {
+                 checknameth();
+                });
 
+            });
 
 /*
 function checkThainame(){

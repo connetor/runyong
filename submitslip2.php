@@ -52,8 +52,6 @@
             </script>
         -->
         <script type="text/javascript">
-     
-
    
     $('#regForm').submit(function(e) {
       

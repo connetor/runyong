@@ -105,7 +105,7 @@
                                                 <option  value="XXXL">3XL</option>
                                       </select>
 
-          <p>การรับเสื้อ หมายเลขBIB:</p>  <input type="radio" name="Postconfirm" value="0" style="width:10px">รับเอง วันที่ 9 มีนาคม 62 เวลา10.00-18.00 <br> 
+          <p>การรับเสื้อ หมายเลขBIB :  <em id="msgPost"></em>  </p>  <input type="radio"  name="Postconfirm" value="0" style="width:10px">รับเอง วันที่ 9 มีนาคม 62 เวลา10.00-18.00 <br> 
                                       <input type="radio" name="Postconfirm" value="1" style="width:10px">จัดส่ง EMS/KERRY ค่าบริการ 70 บาท
 
           <p>ชื่อสังกัด ชมรม ทีม:</p>       <input type="text" name="Team">
