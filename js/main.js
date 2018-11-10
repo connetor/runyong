@@ -3,7 +3,7 @@ showTab(currentTab); // Display the crurrent tab
 
 function showTab(n) {
   // This function will display the specified tab of the form...
-  console.log(n);
+
   var x = document.getElementsByClassName("tab");
   x[n].style.display = "block";
   //... and fix the Previous/Next buttons:
@@ -102,7 +102,7 @@ function nextPrev(n) {
   }
         break;
     case 2:
-    console.log(currentTab);
+   
     if($('input[name=Postconfirm]:checked', '#regForm').val()!= 0 && $('input[name=Postconfirm]:checked', '#regForm').val()!=1){
  
       document.getElementById("msgPost").innerHTML="กรุณาเลือกวิธีส่ง";
@@ -182,16 +182,43 @@ function checkID(){
     }
 }
 
- $(document).ready(function() {
-        
-                $('#IDcard').focusout(function() {
-                 check_IDcard();
-                });
-				$('#nameth').focusout(function() {
-                 checknameth();
-                });
+function idpayment(i){
 
-            });
+
+      var output = [];
+      output = i.split(/([0-9]+)/)
+console.log(output[1]);
+
+  return $.ajax({
+    type: 'POST',
+    data: {IDcard: $('#p'+output[1]).val()},
+    url: 'checkpayment.php'
+}).then(function (response) {
+ 
+if (response == 1) {
+
+$('#m'+output[1]).html('เลขหมายนี้ไม่ได้ลงทะเบียน');
+$('#m'+output[1]).css({"font-size:":"12px","color":"red","float":"right"});
+}
+else if(response == 0){
+  if(output[1]==1){
+    $('#m'+output[1]).html('กรุณากรอกเลขบัตรคนที่ '+output[1]+' (ผู้แจ้ง)');
+    $('#m'+output[1]).css({"font-size:":"12px","color":"red","float":"right"});
+
+  }else{
+$('#m'+output[1]).html('กรุณากรอกเลขบัตรคนที่ '+output[1]);
+$('#m'+output[1]).css({"font-size:":"12px","color":"red","float":"right"});
+}
+}
+else{
+  $('#m'+output[1]).html(' ');
+}
+}, function (error) {
+});
+}
+
+
+       
 
 /*
 function checkThainame(){

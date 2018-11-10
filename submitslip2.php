@@ -51,7 +51,21 @@
             });
             </script>
         -->
+      
+    <script src="js/main.js"></script>
         <script type="text/javascript">
+
+        $(document).ready(function() {
+        var i,length = <?php echo $_POST['person']; ?> ;
+        
+  
+        $("input").focusout(function() {
+            var className = $(this).attr('id');
+        
+            idpayment(className)
+        });
+
+    });
    
     $('#regForm').submit(function(e) {
       
@@ -64,29 +78,21 @@
     }
 
         for(i=1;i<=length;i++){
-            if($('#p'+i).val()==""){
-            
-                if(i==1){
-                    $('#m'+i).html('กรุณากรอกเลขบัตรคนที่ '+i+' (ผู้แจ้ง)');
-                $('#m'+i).css({"font-size:":"12px","color":"red","float":"right"});
-                e.preventDefault();
-                }else{
-                $('#m'+i).html('กรุกรอกเลขบัตรคนที่ '+i);
-                $('#m'+i).css({"font-size:":"12px","color":"red","float":"right"});
-                e.preventDefault();
-                }
+            if($('#p'+i).val()=="" || $('#m'+i).text()=="เลขหมายนี้ไม่ได้ลงทะเบียน"){
+                $('#p'+i).focus();
+                e.preventDefault();        
             }else{
                 $('#m'+i).text(" ");
             
-            }
-
-            
+            }       
         }
 
+    
+      
        if (document.getElementById("file").files.length != 0 ) {
         $('#massege').html(" ");
         for(i=1;i<=length;i++){
-             console.log(length);
+        
             if($('#p'+i).val()!=""){
               check=1;
             }else{
@@ -105,7 +111,20 @@
     }
 }
     
-      
+      		
+
+  $('#regForm').each(function(){
+
+$(this).find('span').each(function(){
+    if($(this).text() === 'เลขหมายนี้ไม่ได้ลงทะเบียน'){
+        e.preventDefault();
+    }else{
+        
+    }
+  
+});
+
+});
     
 });
 
